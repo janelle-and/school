@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Shopping List MVC</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>Shopping List</h1>
+  <div style="display:flex; gap:40px;">
+
+    <div>
+      <h2>Wish List</h2>
+      <form action="/add" method="POST">
+        <input type="text" name="item" placeholder="Add item" required>
+        <input type="hidden" name="listType" value="wish">
+        <button>Add</button>
+      </form>
+      <ul>
+        <% wishList.forEach(function(item) { %>
+          <li>
+            <%= item %>
+            <form action="/toggle" method="POST" style="display:inline;">
+              <input type="hidden" name="item" value="<%= item %>">
+              <input type="hidden" name="fromList" value="wish">
+              <button>✔</button>
+            </form>
+            <form action="/delete" method="POST" style="display:inline;">
+              <input type="hidden" name="item" value="<%= item %>">
+              <input type="hidden" name="listType" value="wish">
+              <button>✖</button>
+            </form>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Purchased List</h2>
+      <form action="/add" method="POST">
+        <input type="text" name="item" placeholder="Add item" required>
+        <input type="hidden" name="listType" value="purchased">
+        <button>Add</button>
+      </form>
+      <ul>
+        <% purchasedList.forEach(function(item) { %>
+          <li>
+            <%= item %>
+            <form action="/toggle" method="POST" style="display:inline;">
+              <input type="hidden" name="item" value="<%= item %>">
+              <input type="hidden" name="fromList" value="purchased">
+              <button>↩</button>
+            </form>
+            <form action="/delete" method="POST" style="display:inline;">
+              <input type="hidden" name="item" value="<%= item %>">
+              <input type="hidden" name="listType" value="purchased">
+              <button>✖</button>
+            </form>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>
