@@ -37,6 +37,11 @@ public class BookController {
                 .toList();
     }
 
+    // localhost:8080/api/books/{id}
+    @GetMapping("/{id}")
+    public Book getBookById(@PathVariable int id){
+        return bookRepository.findById(id).get();
+    }
 
 
     // before we added external database
